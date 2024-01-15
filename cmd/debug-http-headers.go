@@ -8,7 +8,7 @@ import (
 
 func main() {
 	http.HandleFunc("/", handler)
-  log.Fatal(http.ListenAndServe(":8080", nil))
+	log.Fatal(http.ListenAndServe(":8080", nil))
 }
 
 func handler(w http.ResponseWriter, r *http.Request) {
@@ -25,4 +25,7 @@ func handler(w http.ResponseWriter, r *http.Request) {
 
 	// Odeslání odpovědi s hlavičkami klientovi
 	fmt.Fprintf(w, "%s", headerStr)
+	
+	// Zalogovani na STDOUT
+	log.Printf("%s %s %s", r.RemoteAddr, r.Method, r.URL)
 }
