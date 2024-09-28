@@ -7,16 +7,29 @@ spec:
     spec:
       containers:
       - name: oauth2-proxy
-        image: oauth2-proxy/oauth2-proxy:latest
+        image: quay.io/oauth2-proxy/oauth2-proxy:latest
+        imagePullPolicy: Always
         ports:
           - containerPort: 4180
+        args:
+        - --http-address=0.0.0.0:4180
+        - --upstream=http://127.0.0.1:8080
+        - --email-domain=*
+        - --pass-authorization-header=true
+        - --pass-access-token=true
         env:
         - name: OAUTH2_PROXY_PROVIDER
-          value: "github"
+          value: "azure"
         - name: OAUTH2_PROXY_CLIENT_ID
-          value: "XXX"
+          value: "6fa101f1-32c2-400b-a4e0-04ba0438bd43"
         - name: OAUTH2_PROXY_CLIENT_SECRET
-          value: "XXX"
+          value: "ZrW8Q~OX3HGKY6TcmmXzWzuRmU8tlo-QkUNrvafb"
+        - name: OAUTH2_PROXY_AZURE_TENANT
+          value: "e0690ba2-036d-442a-84ee-e87b1e442964"
+        - name: OAUTH2_PROXY_OIDC_ISSUER_URL
+          value: "https://login.microsoftonline.com/e0690ba2-036d-442a-84ee-e87b1e442964/v2.0"
+        - name: OAUTH2_PROXY_COOKIE_SECRET
+          value: "9usL3JT_RaH3IILutiMoT9FVS8y6InEFOGEJdLY2bZY="
         resources:
           requests:
             cpu: 25m
