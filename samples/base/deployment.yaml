@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
       - name: debugger
-        image: quay.io/cloud-for-you/debugger-pod:main
+        image: quay.io/cloud-for-you/debugger-pod:1.0.0
         ports:
         - containerPort: 8080
         resources:

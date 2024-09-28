@@ -4,6 +4,7 @@ metadata:
   name: debugger
 spec:
   ports:
-  - port: 4180
+  - name: oauth2
+    port: 4180
     protocol: TCP
     targetPort: 4180
