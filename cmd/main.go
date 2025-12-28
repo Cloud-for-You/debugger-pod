@@ -15,7 +15,7 @@ func main() {
 	}
 	defer db.CloseDB()
 
-	http.HandleFunc("/", handlers.Handler)
+	http.HandleFunc("/", handlers.HeaderHandler)
 	http.HandleFunc("/db_connect", handlers.DBConnectHandler)
 	log.Fatal(http.ListenAndServe(":8080", nil))
 }
