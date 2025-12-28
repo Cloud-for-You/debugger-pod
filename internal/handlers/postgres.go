@@ -18,7 +18,7 @@ func DBConnectHandler(w http.ResponseWriter, r *http.Request) {
 		log.Printf("DB ping failed: %v", err)
 	} else {
 		response["status"] = "success"
-		response["message"] = "Spojeni k DB bylo uskutecneni"
+		response["message"] = "Connection to DB was established"
 		log.Printf("DB ping success")
 	}
 

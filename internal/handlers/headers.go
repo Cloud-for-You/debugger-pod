@@ -1,10 +1,9 @@
 package handlers
 
 import (
+	"encoding/json"
 	"log"
 	"net/http"
-
-	"github.com/Clkoud-for-You/debugger-pod/internal/headers"
 )
 
 func HeaderHandler(w http.ResponseWriter, r *http.Request) {
@@ -12,7 +11,7 @@ func HeaderHandler(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Content-Type", "application/json")
 
 	// Zpracování hlaviček pomocí package
-	jsonResponse, err := headers.ProcessHeaders(r)
+	jsonResponse, err := processHeaders(r)
 	if err != nil {
 		http.Error(w, "Error converting headers to JSON", http.StatusInternalServerError)
 		return
@@ -23,4 +22,15 @@ func HeaderHandler(w http.ResponseWriter, r *http.Request) {
 
 	// Zalogovani na STDOUT
 	log.Printf("%s %s %s", r.RemoteAddr, r.Method, r.URL)
+}
+
+func processHeaders(r *http.Request) ([]byte, error) {
+	headers := r.Header
+
+	headerMap := make(map[string][]string)
+	for key, values := range headers {
+		headerMap[key] = values
+	}
+
+	return json.Marshal(headerMap)
 }

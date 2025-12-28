@@ -3,20 +3,15 @@ package db
 import (
 	"database/sql"
 	"log"
-	"os"
 
 	_ "github.com/lib/pq"
 )
 
 var DB *sql.DB
 
-func InitDB() error {
-	dbURL := os.Getenv("DB_URL")
-	if dbURL == "" {
-		dbURL = "postgres://user:password@localhost/dbname?sslmode=disable" // default for testing
-	}
+func InitDB(connStr string) error {
 	var err error
-	DB, err = sql.Open("postgres", dbURL)
+	DB, err = sql.Open("postgres", connStr)
 	if err != nil {
 		return err
 	}
